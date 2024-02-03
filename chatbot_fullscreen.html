@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/chatbot_fullscreen.css') }}">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>Chatbot</title>
+</head>
+
+<body>
+    <div class="chatbox">
+        <div class="chatbox__top-container">
+            <div class="chatbox__top-container__header">
+                <div class="chatbox__top-container__header__left-container">
+                    <img class="chatbox__top-container__header__left-container__chatbot-image"
+                         src="{{ url_for('send_file', filename=profile_image) }}">
+                    <h4 class="chatbox__top-container__header__left-container__chatbot-title">{{ title }}</h4>
+                </div>
+                <div class="chatbox__top-container__header__right-container">
+                    <button class="chatbox__top-container__header__right-container__js-refresh-button">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="#3F3F45" aria-hidden="true" class="h-5 w-5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"></path>
+                        </svg>
+                    </button>
+                    <button class="chatbox__top-container__header__right-container__js-close-button {{ 'chatbox__top-container__header__right-container__js-close-button--visible' if display_button else 'chatbox__top-container__header__right-container__js-close-button--hidden' }}">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="#3F3F45" aria-hidden="true" class="h-6 w-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <hr class="chatbox__top-container__divider">
+            <div class="chatbox__top-container__js-messages">
+                <p></p>
+            </div>
+        </div>
+        <div class="chatbox__footer">
+            <div class="chatbox__footer__prompt-div">
+                <button></button>
+            </div>
+            <div class="chatbox__footer__input-div" style="border-color: {{input_outline_color}}">
+                <input class="chatbox__footer__input-div__js-input" type="text" placeholder="Write a message...">
+                <button class="chatbox__footer__input-div__js-send-button">
+                    <img src="{{ url_for('send_file', filename=send_button) }}" />
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $SCRIPT_ROOT = {{ request.script_root|tojson }};
+        $VISITOR_MESSAGE_COLOR = {{ visitor_message_color|tojson }};
+        $SUGGESTED_PROMPTS_TEXT_COLOR = {{ suggested_prompts_text_color|tojson }};
+        $SUGGESTED_PROMPTS_BACKGROUND_COLOR = {{ suggested_prompts_background_color|tojson }};
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/markdown-it@12.2.0/dist/markdown-it.min.js"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/chatbot_fullscreen.js') }}"></script>
+</body>
+
+</html>
